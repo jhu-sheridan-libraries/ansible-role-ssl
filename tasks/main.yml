@@ -1,0 +1,7 @@
+---
+- name: Populate SSL Certificates
+  copy: content={{ssl_certs[item].cert}} dest=/etc/pki/tls/certs/{{item}}.crt owner=root group=root mode=0644
+  with_list:
+    "{{ ssl_certificates }}"
+  when:
+    ssl_certificates is defined
