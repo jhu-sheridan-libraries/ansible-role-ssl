@@ -5,3 +5,17 @@
     "{{ ssl_certificates }}"
   when:
     ssl_certificates is defined
+
+- name: Populate SSL Keys
+  copy: content={{ssl_certs[item].key}} dest=/etc/pki/tls/private/{{item}}.key owner=root group=root mode=0600
+  with_list:
+    "{{ ssl_certificates }}"
+  when:
+    ssl_certificates is defined
+
+- name: Populate SSL Intermediates
+  copy: content={{ssl_certs[item].interim}} dest=/etc/pki/tls/certs/{{item}}_interim.crt owner=root group=root mode=0644
+  with_list:
+    "{{ ssl_certificates }}"
+  when:
+    ssl_certificates is defined
