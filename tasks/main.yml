@@ -14,7 +14,7 @@
     ssl_certificates is defined
 
 - name: Populate SSL Intermediates
-  copy: content={{ssl_certs[item].interim}} dest=/etc/pki/tls/certs/{{item}}_interim.crt owner=root group=root mode=0644
+  copy: content={{ssl_certs[item].interm}} dest=/etc/pki/tls/certs/{{item}}_interm.crt owner=root group=root mode=0644
   with_list:
     "{{ ssl_certificates }}"
   when:
